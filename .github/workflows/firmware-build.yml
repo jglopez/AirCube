@@ -14,7 +14,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.3.1
 
       - name: Build AirCube firmware (ESP32-H2)
         uses: espressif/esp-idf-ci-action@v1
