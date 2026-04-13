@@ -10,15 +10,46 @@ on:
       - "firmware/**"
       - ".github/workflows/firmware-build.yml"
 
+env:
+  # Pins the ESP-IDF Docker image used by esp-idf-ci-action. Keep this in sync
+  # with the version used to produce official releases — v1.3 was built with v5.5.1.
+  # Must stay >= 5.0.0 per firmware/main/idf_component.yml. Bump here when
+  # cutting a new release with a newer IDF version.
+  IDF_VERSION: v5.5.1
+  # GitHub default retention is 90 days; shorter here since these are dev builds,
+  # not releases. Increase if you need longer-lived artifacts for QA or distribution.
+  ARTIFACT_RETENTION_DAYS: 30
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
 
+      # Cache IDF Component Manager downloads (Zigbee libs, etc.) between runs.
+      # The cache key includes a hash of idf_component.yml so the cache is
+      # automatically invalidated whenever dependencies are added or version-bumped —
+      # no manual cache-busting needed. restore-keys allows a partial hit on the
+      # same IDF version if the exact hash doesn't match (e.g. first run after a
+      # dep change), which is still faster than a cold download.
+      - name: Cache IDF managed components
+        uses: actions/cache@v4
+        with:
+          path: firmware/managed_components
+          key: idf-components-${{ env.IDF_VERSION }}-${{ hashFiles('firmware/main/idf_component.yml') }}
+          restore-keys: idf-components-${{ env.IDF_VERSION }}-
+
       - name: Build AirCube firmware (ESP32-H2)
         uses: espressif/esp-idf-ci-action@v1
         with:
-          esp_idf_version: v5.3.2
+          esp_idf_version: ${{ env.IDF_VERSION }}
           target: esp32h2
           path: firmware
+          command: idf.py build && idf.py merge-bin -o build/AirCube-merged.bin
+
+      - name: Upload firmware artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: aircube-firmware-esp32h2
+          path: firmware/build/AirCube-merged.bin
+          retention-days: ${{ env.ARTIFACT_RETENTION_DAYS }}
