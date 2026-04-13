@@ -51,6 +51,27 @@ This guide walks you through updating your AirCube firmware using Espressif's we
 1. When programming is complete, unplug the USB-C cable and plug it back in.
 2. AirCube will boot the new firmware. The LED should light up green after a few seconds.
 
+## Fallback: esptool
+
+If ESP Launchpad doesn't work, you can flash directly from the command line using [esptool](https://docs.espressif.com/projects/esptool/en/latest/).
+
+**Install:**
+
+- macOS: `brew install esptool`
+- All platforms: `pip install esptool`
+
+**Flash:**
+
+```bash
+esptool --port <port> write-flash 0x0 AirCube_firmware_v.1.3.bin
+```
+
+Replace `<port>` with your device's serial port:
+
+- macOS: `/dev/cu.usbmodem*` (check `ls /dev/cu.*`)
+- Linux: `/dev/ttyACM0` or `/dev/ttyUSB0` (check `ls /dev/tty*`)
+- Windows: `COM3` or similar (check Device Manager)
+
 ## Troubleshooting
 
 - **No device in the Connect dialog:** Make sure another app isn't using the serial port. Try a different USB port or cable. On some cables, flipping the USB-C connector helps.
