@@ -40,7 +40,7 @@ jobs:
       # same IDF version if the exact hash doesn't match (e.g. first run after a
       # dep change), which is still faster than a cold download.
       - name: Cache IDF managed components
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: firmware/managed_components
           key: idf-components-${{ env.IDF_VERSION }}-${{ hashFiles('firmware/main/idf_component.yml') }}
@@ -58,7 +58,7 @@ jobs:
         run: sudo mv firmware/build/AirCube-merged.bin firmware/build/AirCube-${{ steps.meta.outputs.sha }}.bin
 
       - name: Upload firmware artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: aircube-firmware-${{ steps.meta.outputs.sha }}
           path: firmware/build/AirCube-${{ steps.meta.outputs.sha }}.bin
