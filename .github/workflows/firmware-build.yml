@@ -45,7 +45,7 @@ jobs:
           esp_idf_version: ${{ env.IDF_VERSION }}
           target: esp32h2
           path: firmware
-          command: idf.py build && idf.py merge-bin -o build/AirCube-merged.bin
+          command: idf.py build && idf.py merge-bin -o AirCube-merged.bin
 
       - name: Upload firmware artifact
         uses: actions/upload-artifact@v4
