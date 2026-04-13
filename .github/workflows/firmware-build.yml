@@ -55,7 +55,7 @@ jobs:
           command: idf.py build && idf.py merge-bin -o AirCube-merged.bin
 
       - name: Rename firmware with git hash
-        run: mv firmware/build/AirCube-merged.bin firmware/build/AirCube-${{ steps.meta.outputs.sha }}.bin
+        run: sudo mv firmware/build/AirCube-merged.bin firmware/build/AirCube-${{ steps.meta.outputs.sha }}.bin
 
       - name: Upload firmware artifact
         uses: actions/upload-artifact@v4
