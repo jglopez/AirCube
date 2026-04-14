@@ -58,7 +58,7 @@ If ESP Launchpad doesn't work, you can flash directly from the command line usin
 **Install:**
 
 - macOS: `brew install esptool`
-- All platforms: `pip install esptool`
+- All platforms: `python -m pip install esptool`
 
 **Flash:**
 
