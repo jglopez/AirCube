@@ -97,7 +97,7 @@ AirCube/
 Install dependencies and ESP-IDF with two commands from the repo root:
 
 ```bash
-brew bundle        # installs cmake, dfu-util, python, and the eim installer
+brew bundle        # installs cmake, dfu-util, python, esptool, and the eim installer
 eim install        # installs ESP-IDF; note the path to export.sh it prints
 ```
 

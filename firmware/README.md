@@ -7,7 +7,7 @@ Requires ESP-IDF >= 5.0.0 and the ESP32-H2 toolchain.
 ### macOS (via Homebrew)
 
 ```bash
-brew bundle          # from repo root — installs cmake, dfu-util, python, eim
+brew bundle          # from repo root — installs cmake, dfu-util, python, eim, esptool
 eim install          # installs ESP-IDF; note the printed path to export.sh
 ```
 
