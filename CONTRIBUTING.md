@@ -69,6 +69,10 @@ AirCube/
 │       ├── profiles/
 │       └── src/
 │
+├── Brewfile               # macOS dev dependencies (brew bundle)
+├── .github/
+│   └── workflows/
+│       └── firmware-build.yml  # CI: builds firmware on push/PR
 ├── README.md              # Customer-facing product page
 ├── HOME_ASSISTANT.md      # Home Assistant integration guide
 ├── SMARTTHINGS.md         # SmartThings hub + CLI integration guide
@@ -82,9 +86,20 @@ AirCube/
 
 ### Prerequisites
 
-- [ESP-IDF](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/) **v5.0 or later** (v5.3+ recommended)
+- [ESP-IDF](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/) **v5.0 or later** (v5.5+ recommended — CI and official releases use v5.5.1)
 - A USB-C cable (data-capable)
 - An AirCube board, or any ESP32-H2 dev board with ENS210 + ENS16X on I2C
+
+### macOS (Homebrew)
+
+Install dependencies and ESP-IDF with two commands from the repo root:
+
+```bash
+brew bundle        # installs cmake, dfu-util, python, esptool, and the eim installer
+eim install        # installs ESP-IDF; note the path to export.sh it prints
+```
+
+Then continue with the steps below.
 
 ### Clone and build
 
