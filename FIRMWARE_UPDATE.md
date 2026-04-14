@@ -42,6 +42,27 @@ If you built the firmware yourself with `idf.py build`, you have two options:
 
 Use the **Local .bin** button in the flash dialog to pick the file, then choose the matching offset.
 
+## Fallback: esptool
+
+If ESP Launchpad doesn't work, you can flash directly from the command line using [esptool](https://docs.espressif.com/projects/esptool/en/latest/).
+
+**Install:**
+
+- macOS: `brew install esptool`
+- All platforms: `python -m pip install esptool`
+
+**Flash:**
+
+```bash
+esptool --port <port> write-flash 0x0 AirCube_firmware_v.1.3.bin
+```
+
+Replace `<port>` with your device's serial port:
+
+- macOS: `/dev/cu.usbmodem*` (check `ls /dev/cu.*`)
+- Linux: `/dev/ttyACM0` or `/dev/ttyUSB0` (check `ls /dev/tty*`)
+- Windows: `COM3` or similar (check Device Manager)
+
 ## Troubleshooting
 
 - **No device in the connect dialog:** Make sure another app isn't using the serial port. Try a different USB port or cable. On some USB-C cables, flipping the connector helps.
