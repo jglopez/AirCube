@@ -11,7 +11,7 @@ This fork maintains two long-lived branches:
 git fetch upstream
 git checkout master
 git reset --hard upstream/master
-git push origin master
+git push --force-with-lease origin master
 git checkout personal
 git rebase master
 ```
