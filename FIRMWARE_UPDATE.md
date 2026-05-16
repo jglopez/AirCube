@@ -54,7 +54,7 @@ If ESP Launchpad doesn't work, you can flash directly from the command line usin
 **Flash:**
 
 ```bash
-esptool --port <port> write-flash 0x0 AirCube_firmware_v.1.3.bin
+esptool --port <port> write-flash 0x0 <firmware-filename>.bin
 ```
 
 Replace `<port>` with your device's serial port:
